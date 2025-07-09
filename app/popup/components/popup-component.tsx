@@ -1,11 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import React from "react";
 
 function PopupComponent() {
+  const [showCamera, setShowCamera] = React.useState(false);
+
   return (
     <Card
       style={{
@@ -30,8 +30,8 @@ function PopupComponent() {
       </CardHeader>
       <CardContent className="w-full flex flex-col gap-y-3">
         <section className="w-full flex flex-col items-center">
-          <ToggleGroup type="single" className="grid grid-cols-3 gap-x-4">
-            <ToggleGroupItem value="a">
+          <div className="grid grid-cols-3 gap-x-4">
+            <button>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -49,8 +49,8 @@ function PopupComponent() {
                 <path d="M7 22h10" />
                 <path d="M12 22v-4" />
               </svg>
-            </ToggleGroupItem>
-            <ToggleGroupItem value="b">
+            </button>
+            <button>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -68,8 +68,8 @@ function PopupComponent() {
                 <path d="M10 8h.01" />
                 <path d="M14 8h.01" />
               </svg>
-            </ToggleGroupItem>
-            <ToggleGroupItem value="c">
+            </button>
+            <button>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -87,15 +87,27 @@ function PopupComponent() {
                 <path d="M12 17v4" />
                 <path d="M8 21h8" />
               </svg>
-            </ToggleGroupItem>
-          </ToggleGroup>
+            </button>
+          </div>
         </section>
         <section>{/* options showup */}</section>
-        <form className="flex items-center justify-center mb-3">
-          <Button type="button" className="w-full">
+        <div className="flex items-center justify-center mb-3">
+          <button type="button" onClick={() => setShowCamera(true)}>
             Start Session
-          </Button>
-        </form>
+          </button>
+        </div>
+
+        <div>
+          {showCamera && (
+            <iframe
+              src="/public/camera.html"
+              width="100%"
+              height="240"
+              allow="camera"
+              style={{ border: "none", marginTop: "20px" }}
+            />
+          )}
+        </div>
       </CardContent>
     </Card>
   );
